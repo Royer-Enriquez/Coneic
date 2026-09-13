@@ -1,0 +1,41 @@
+{
+  "name": "CONEIC Huancayo 2027",
+  "short_name": "CONEIC 2027",
+  "description": "Plataforma oficial del Congreso Nacional de Estudiantes de Ingeniería Civil — Huancayo 2027",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#1C2740",
+  "theme_color": "#1C2740",
+  "orientation": "portrait-primary",
+  "lang": "es-PE",
+  "categories": ["education", "events"],
+  "icons": [
+    { "src": "icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any maskable" },
+    { "src": "icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any maskable" }
+  ],
+  "shortcuts": [
+    {
+      "name": "Entradas",
+      "short_name": "Entradas",
+      "description": "Ver los tipos de entrada disponibles",
+      "url": "./index.html#entradas",
+      "icons": [{ "src": "icon-192.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "Talleres",
+      "short_name": "Talleres",
+      "description": "Ver cupos disponibles en talleres",
+      "url": "./index.html#talleres",
+      "icons": [{ "src": "icon-192.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "Cronograma",
+      "short_name": "Cronograma",
+      "description": "Ver el programa del congreso",
+      "url": "./index.html#cronograma",
+      "icons": [{ "src": "icon-192.png", "sizes": "192x192" }]
+    }
+  ]
+}
+

@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pruebas Supabase V3.2</title>
+    <style>
+        body { font-family: Arial, sans-serif; max-width: 1100px; margin: 30px auto; padding: 0 20px; line-height: 1.4; }
+        section { border: 1px solid #ccc; border-radius: 8px; padding: 18px; margin-bottom: 20px; }
+        .fila { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 10px; }
+        input { padding: 8px; min-width: 240px; }
+        button { padding: 8px 12px; cursor: pointer; }
+        #resultado { background: #f4f4f4; border: 1px solid #ddd; padding: 15px; min-height: 120px; white-space: pre-wrap; overflow-x: auto; }
+        .nota { font-size: 0.92rem; color: #444; }
+    </style>
+</head>
+<body>
+
+<h1>Pruebas Supabase V3.2</h1>
+
+<section>
+    <h2>1. Autenticación</h2>
+    <div class="fila">
+        <input id="correo" type="email" value="participante1@example.com" placeholder="Correo">
+        <input id="password" type="password" placeholder="Contraseña">
+    </div>
+    <div class="fila">
+        <button id="btnLogin">Iniciar sesión</button>
+        <button id="btnLogout">Cerrar sesión</button>
+        <button id="btnSesion">Ver usuario actual</button>
+    </div>
+</section>
+
+<section>
+    <h2>2. Inscripción general al evento</h2>
+    <div class="fila">
+        <button id="btnEventoGratuito">Inscribirme al evento gratuito</button>
+        <button id="btnEventoPago">Inscribirme al evento con pago</button>
+    </div>
+
+    <h3>Verificación manual de pago - Admin</h3>
+    <div class="fila">
+        <input id="idInscripcionPago" type="text" placeholder="ID de la inscripción">
+        <input id="referenciaPago" type="text" value="PRUEBA-001" placeholder="Referencia de pago">
+        <button id="btnVerificarPago">Verificar pago</button>
+    </div>
+</section>
+
+<section>
+    <h2>3. Ponencias</h2>
+    <div class="fila">
+        <button id="btnPonencia">Inscribirme a la ponencia de prueba</button>
+    </div>
+</section>
+
+<section>
+    <h2>4. Concursos por equipos</h2>
+    <div class="fila">
+        <input id="nombreEquipo" type="text" value="Equipo Prueba 1" placeholder="Nombre del equipo">
+        <button id="btnCrearEquipo">Crear equipo</button>
+    </div>
+    <div class="fila">
+        <input id="codigoEquipo" type="text" placeholder="Código de invitación">
+        <button id="btnUnirseEquipo">Unirme al equipo</button>
+    </div>
+    <div class="fila">
+        <input id="idEquipo" type="text" placeholder="ID del equipo">
+        <button id="btnInscribirEquipo">Inscribir equipo al concurso</button>
+    </div>
+</section>
+
+<section>
+    <h2>5. QR del participante</h2>
+    <div class="fila">
+        <button id="btnQrGratuito">Obtener QR del evento gratuito</button>
+        <button id="btnQrPago">Obtener QR del evento con pago</button>
+        <button id="btnRegenerarQrGratuito">Regenerar QR gratuito</button>
+    </div>
+    <p class="nota">Durante las pruebas se muestra el token UUID. En la web final este token se convertirá en una imagen QR.</p>
+</section>
+
+<section>
+    <h2>6. Cursos académicos</h2>
+    <div class="fila">
+        <button id="btnAgregarCursoSuelos">Agregar Mecánica de Suelos a mis cursos</button>
+        <button id="btnAgregarCursoVial">Agregar Diseño Vial a mis cursos</button>
+    </div>
+    <h3>Usar la misma ponencia para cualquier curso</h3>
+    <div class="fila">
+        <button id="btnCursoSuelos">Usar ponencia para Mecánica de Suelos</button>
+        <button id="btnCursoVial">Usar la misma ponencia para Diseño Vial</button>
+    </div>
+</section>
+
+<section>
+    <h2>7. Presencia por sala - V3.2</h2>
+    <div class="fila">
+        <input id="tokenQrSala" type="text" placeholder="Token QR del participante">
+    </div>
+    <div class="fila">
+        <button id="btnEscanearAuditorio">Escanear en Auditorio</button>
+        <button id="btnEscanearSala2">Escanear en Sala Secundaria</button>
+    </div>
+    <p class="nota">Primer escaneo: entrada. Segundo escaneo en la misma sala: salida. Si escanea en otra sala, se realiza cambio de sala. Después de una salida puede volver a ingresar y crear otra sesión.</p>
+</section>
+
+<section>
+    <h2>8. Mi asistencia</h2>
+    <div class="fila">
+        <button id="btnMiAsistencia">Ver mi asistencia al evento</button>
+    </div>
+</section>
+
+<section>
+    <h2>9. Reportes por curso - Admin</h2>
+    <div class="fila">
+        <button id="btnReporteSuelos">Ver reporte Mecánica de Suelos</button>
+        <button id="btnReporteVial">Ver reporte Diseño Vial</button>
+    </div>
+    <div class="fila">
+        <button id="btnExcelSuelos">Descargar Excel - Mecánica de Suelos</button>
+        <button id="btnExcelVial">Descargar Excel - Diseño Vial</button>
+    </div>
+    <p class="nota">Solo un administrador debe poder generar estos reportes.</p>
+</section>
+
+
+<section>
+    <h2>10. Mi certificado - V3.2.1</h2>
+
+    <div class="fila">
+        <button id="btnElegibilidadCertificado">
+            Consultar elegibilidad
+        </button>
+
+        <button id="btnEmitirMiCertificado">
+            Generar mi certificado
+        </button>
+    </div>
+
+    <div class="fila">
+        <input
+            id="codigoMiCertificado"
+            type="text"
+            placeholder="Código CERT-..."
+        >
+
+        <button id="btnVerificarMiCertificado">
+            Verificar certificado
+        </button>
+    </div>
+
+    <p class="nota">
+        El participante solo puede generar su propio certificado cuando
+        la base confirma que cumple el porcentaje mínimo de asistencia.
+    </p>
+</section>
+
+<section>
+    <h2>Resultado</h2>
+    <pre id="resultado">Esperando una prueba...</pre>
+</section>
+
+<script src="https://cdn.jsdelivr.net/npm/xlsx-js-style@1.2.0/dist/xlsx.bundle.js"></script>
+<script type="module" src="./prueba-supabase-v3_2_1.js"></script>
+
+</body>
+</html>
